@@ -1,4 +1,26 @@
-// -------- TRAININGS --------
+// -------- Load user data from Firestore --------
+async function loadUserData() {
+  const currentUser = localStorage.getItem("currentUser");
+  if (!currentUser) return;
+
+  try {
+    const userRef = db.collection("users").doc(currentUser.toLowerCase());
+    const docSnap = await userRef.get();
+
+    if (docSnap.exists) {
+      const data = docSnap.data();
+      document.getElementById("welcome-title").textContent = `👋 Welcome ${data.name}`;
+      document.getElementById("welcome-message").textContent = data.message;
+    } else {
+      document.getElementById("welcome-title").textContent = "👋 Welcome!";
+      document.getElementById("welcome-message").textContent = "No personalized data found.";
+    }
+  } catch (error) {
+    console.error("Error loading user data:", error);
+  }
+}
+
+// -------- Trainings --------
 function addTraining() {
   const input = document.getElementById("new-training");
   const trainingName = input.value.trim();
@@ -13,7 +35,7 @@ function addTraining() {
   }
 }
 
-// -------- COURSE SUGGESTIONS --------
+// -------- Course Suggestions --------
 function searchCourses() {
   const query = document.getElementById("search-input").value.trim().toLowerCase();
   const suggestionsList = document.getElementById("suggestions-list");
@@ -24,7 +46,6 @@ function searchCourses() {
     return;
   }
 
-  // Curated sample links
   const courses = [
     { name: "AI for Everyone – Coursera", url: "https://www.coursera.org/learn/ai-for-everyone" },
     { name: "Machine Learning – Coursera", url: "https://www.coursera.org/learn/machine-learning" },
@@ -48,7 +69,7 @@ function searchCourses() {
   }
 }
 
-// -------- PROGRESS TRACKER --------
+// -------- Progress Tracker --------
 function updateProgress(employee) {
   const progressBar = document.getElementById(`${employee}-progress`);
   const input = document.getElementById(`${employee}-input`);
@@ -63,9 +84,10 @@ function updateProgress(employee) {
   }
 }
 
-// -------- FORM HANDLERS --------
+// -------- On Page Load --------
 document.addEventListener("DOMContentLoaded", () => {
-  // Restore saved progress
+  loadUserData();
+
   ["aishwarya", "raj"].forEach(emp => {
     const saved = localStorage.getItem(`${emp}-progress`);
     if (saved !== null) {
@@ -74,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Trainings form
   const trainingForm = document.getElementById("training-form");
   if (trainingForm) {
     trainingForm.addEventListener("submit", (e) => {
@@ -83,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Search form
   const searchForm = document.getElementById("search-form");
   if (searchForm) {
     searchForm.addEventListener("submit", (e) => {
@@ -92,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Progress forms
   const progressForms = document.querySelectorAll(".progress-item");
   progressForms.forEach(form => {
     form.addEventListener("submit", (e) => {
