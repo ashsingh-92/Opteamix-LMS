@@ -51,10 +51,27 @@
       <ul id="suggestions-list"></ul>
     </section>
 
-    <!-- Progress -->
+    <!-- Progress (NEW functional tracker) -->
     <section id="progress" class="card">
       <h2>📈 Progress Tracker</h2>
-      <p>Feature coming soon 🚀</p>
+
+      <div class="progress-item">
+        <span>Aishwarya</span>
+        <progress id="aishwarya-progress" value="60" max="100"></progress>
+        <div class="progress-controls">
+          <input type="number" id="aishwarya-input" min="0" max="100" placeholder="Update %" />
+          <button onclick="updateProgress('aishwarya')">Update</button>
+        </div>
+      </div>
+
+      <div class="progress-item">
+        <span>Raj</span>
+        <progress id="raj-progress" value="30" max="100"></progress>
+        <div class="progress-controls">
+          <input type="number" id="raj-input" min="0" max="100" placeholder="Update %" />
+          <button onclick="updateProgress('raj')">Update</button>
+        </div>
+      </div>
     </section>
   </main>
 
