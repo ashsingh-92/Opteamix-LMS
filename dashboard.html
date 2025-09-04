@@ -6,7 +6,7 @@
   <title>Opteamix LMS – Dashboard</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="dashboard">
   <!-- Navbar -->
   <nav class="navbar">
     <div class="logo-wrap">
@@ -22,14 +22,14 @@
     </ul>
   </nav>
 
-  <!-- Header banner -->
+  <!-- Header -->
   <header class="header">
     <h1>Learning Management System</h1>
   </header>
 
   <!-- Main grid -->
   <main class="container">
-    <!-- 🔹 Welcome card -->
+    <!-- Welcome -->
     <section id="welcome" class="card welcome-card">
       <h2 id="welcome-title">👋 Welcome!</h2>
       <p id="welcome-message">Loading your data...</p>
@@ -80,12 +80,10 @@
     </section>
   </main>
 
-  <!-- ✅ Firebase SDKs (Compat version so firebase is global) -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
   <script>
-    // ✅ Your Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyC9Na9VtSJeyrbKEYBRie4wMv-DNg7XCVs",
       authDomain: "opteamix-lms-4f048.firebaseapp.com",
@@ -94,13 +92,9 @@
       messagingSenderId: "830897127147",
       appId: "1:830897127147:web:6276702cedbba9433e88ae"
     };
-
-    // ✅ Initialize Firebase (compat syntax)
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
   </script>
-
-  <!-- Your app logic -->
   <script src="app.js"></script>
 </body>
 </html>
