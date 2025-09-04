@@ -1,26 +1,94 @@
+/* ---------- Reset ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+
+/* ---------- LOGIN PAGE ---------- */
+body.login-page {
+  display: flex; justify-content: center; align-items: center;
+  height: 100vh; background: #004c97; color: #333;
+}
+.login-container {
+  background: #fff; padding: 2rem; border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); text-align: center; width: 320px;
+}
+.login-logo { width: 140px; margin-bottom: 15px; }
+.login-container h2 { margin-bottom: 1rem; color: #004c97; }
+.login-container input {
+  width: 100%; padding: 10px; margin: 10px 0;
+  border: 1px solid #ccd6e0; border-radius: 6px;
+}
+.login-container button {
+  width: 100%; padding: 10px; background: #004c97; color: #fff;
+  border: none; border-radius: 6px; cursor: pointer; font-size: 1rem;
+}
+.login-container button:hover { background: #003366; }
+
+/* ---------- DASHBOARD ---------- */
+body.dashboard { background: #f5f9ff; color: #333; }
+
+/* Navbar */
+body.dashboard .navbar {
+  background-color: #003366; display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 30px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+body.dashboard .logo-wrap { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 20px; font-weight: bold; }
+body.dashboard .nav-logo { height: 35px; }
+body.dashboard .nav-links { display: flex; gap: 20px; list-style: none; }
+body.dashboard .nav-links a {
+  padding: 8px 16px; font-size: 15px; font-weight: 600; color: #fff; text-decoration: none;
+  border-radius: 6px; transition: 0.25s;
+}
+body.dashboard .nav-links a:hover,
+body.dashboard .nav-links a.active { background-color: #005f8a; }
+
+/* Header */
+body.dashboard .header {
+  text-align: center; background: #005f8a; color: #fff; padding: 25px 10px; font-size: 24px;
+}
+
 /* Main grid */
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
-  padding: 30px;
+body.dashboard .container {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px; padding: 30px;
 }
 
-/* Force Welcome card full width */
-.welcome-card {
-  grid-column: 1 / -1;   /* spans across all columns */
-  text-align: center;
-  background: #e9f4ff;
-  padding: 25px;
+/* Cards */
+body.dashboard .card {
+  background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
+body.dashboard .card h2 { margin-bottom: 15px; color: #003366; }
 
-.welcome-card h2 {
-  font-size: 28px;
-  color: #003366;
-  margin-bottom: 10px;
+/* Welcome full width */
+body.dashboard .welcome-card {
+  grid-column: 1 / -1; text-align: center; background: #e9f4ff; padding: 25px;
 }
+body.dashboard .welcome-card h2 { font-size: 28px; color: #003366; margin-bottom: 10px; }
+body.dashboard .welcome-card p { font-size: 18px; color: #444; }
 
-.welcome-card p {
-  font-size: 18px;
-  color: #444;
+/* Form rows */
+body.dashboard .form-row { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+body.dashboard .form-row input {
+  flex: 1; padding: 10px; border: 1px solid #ccd6e0; border-radius: 6px;
 }
+body.dashboard .form-row button {
+  padding: 10px 15px; background: #0077cc; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;
+}
+body.dashboard .form-row button:hover { background: #005f8a; }
+
+/* Suggestions */
+body.dashboard #suggestions-list li { margin: 8px 0; }
+body.dashboard #suggestions-list a { color: #0077cc; text-decoration: underline; }
+
+/* Progress */
+body.dashboard .progress-item { margin-bottom: 22px; }
+body.dashboard .progress-item span { display: block; font-weight: bold; margin-bottom: 6px; }
+body.dashboard progress {
+  width: 100%; height: 18px; margin-bottom: 8px; accent-color: #0077cc; transition: width 0.4s ease;
+}
+body.dashboard .progress-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+body.dashboard .progress-controls input {
+  width: 90px; padding: 7px 8px; border: 1px solid #ccd6e0; border-radius: 6px;
+}
+body.dashboard .progress-controls button {
+  padding: 8px 12px; background: #0077cc; color: #fff; border: 0; border-radius: 6px; cursor: pointer;
+}
+body.dashboard .progress-controls button:hover { background: #005f8a; }
