@@ -1,4 +1,4 @@
-// -------- Load user data from Firestore --------
+// -------- Firestore: Welcome message --------
 async function loadUserData() {
   const currentUser = localStorage.getItem("currentUser");
   if (!currentUser) return;
@@ -35,7 +35,7 @@ function addTraining() {
   }
 }
 
-// -------- Course Suggestions --------
+// -------- Suggestions --------
 function searchCourses() {
   const query = document.getElementById("search-input").value.trim().toLowerCase();
   const suggestionsList = document.getElementById("suggestions-list");
@@ -69,7 +69,7 @@ function searchCourses() {
   }
 }
 
-// -------- Progress Tracker --------
+// -------- Progress --------
 function updateProgress(employee) {
   const progressBar = document.getElementById(`${employee}-progress`);
   const input = document.getElementById(`${employee}-input`);
@@ -84,7 +84,7 @@ function updateProgress(employee) {
   }
 }
 
-// -------- On Page Load --------
+// -------- Init --------
 document.addEventListener("DOMContentLoaded", () => {
   loadUserData();
 
