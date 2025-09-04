@@ -24,7 +24,7 @@ function searchCourses() {
     return;
   }
 
-  // Curated sample links (you can extend/replace with API later)
+  // Curated sample links
   const courses = [
     { name: "AI for Everyone – Coursera", url: "https://www.coursera.org/learn/ai-for-everyone" },
     { name: "Machine Learning – Coursera", url: "https://www.coursera.org/learn/machine-learning" },
@@ -40,7 +40,7 @@ function searchCourses() {
   if (results.length > 0) {
     results.forEach(course => {
       const li = document.createElement("li");
-      li.innerHTML = `<a href="${course.url}" target="_blank">${course.name}</a>`;
+      li.innerHTML = `<a href="${course.url}" target="_blank" rel="noopener">${course.name}</a>`;
       suggestionsList.appendChild(li);
     });
   } else {
@@ -63,13 +63,42 @@ function updateProgress(employee) {
   }
 }
 
-// Load saved progress on page load
+// -------- FORM HANDLERS --------
 document.addEventListener("DOMContentLoaded", () => {
+  // Restore saved progress
   ["aishwarya", "raj"].forEach(emp => {
     const saved = localStorage.getItem(`${emp}-progress`);
     if (saved !== null) {
       const bar = document.getElementById(`${emp}-progress`);
       if (bar) bar.value = parseInt(saved, 10);
     }
+  });
+
+  // Trainings form
+  const trainingForm = document.getElementById("training-form");
+  if (trainingForm) {
+    trainingForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      addTraining();
+    });
+  }
+
+  // Search form
+  const searchForm = document.getElementById("search-form");
+  if (searchForm) {
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      searchCourses();
+    });
+  }
+
+  // Progress forms
+  const progressForms = document.querySelectorAll(".progress-item");
+  progressForms.forEach(form => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const emp = form.getAttribute("data-emp");
+      if (emp) updateProgress(emp);
+    });
   });
 });
