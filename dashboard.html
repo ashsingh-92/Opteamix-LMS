@@ -80,9 +80,9 @@
     </section>
   </main>
 
-  <!-- ✅ Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+  <!-- ✅ Firebase SDKs (Compat version so firebase is global) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
   <script>
     // ✅ Your Firebase config
@@ -95,8 +95,8 @@
       appId: "1:830897127147:web:6276702cedbba9433e88ae"
     };
 
-    // ✅ Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
+    // ✅ Initialize Firebase (compat syntax)
+    firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
   </script>
 
