@@ -35,43 +35,45 @@
         <li><strong>Leadership Skills</strong> – Enrolled: John, Priya</li>
         <li><strong>Time Management</strong> – Enrolled: Aishwarya, Raj</li>
       </ul>
-      <div class="form-row">
-        <input id="new-training" type="text" placeholder="Enter course name"/>
-        <button onclick="addTraining()">➕ Add Training</button>
-      </div>
+
+      <!-- Form so Enter works -->
+      <form id="training-form" class="form-row">
+        <input id="new-training" type="text" placeholder="Enter course name" />
+        <button type="submit">➕ Add Training</button>
+      </form>
     </section>
 
     <!-- Suggestions -->
     <section id="suggestions" class="card">
       <h2>🔍 Course Suggestions</h2>
-      <div class="form-row">
+      <form id="search-form" class="form-row">
         <input id="search-input" type="text" placeholder="Search for courses (e.g., AI, Leadership)"/>
-        <button onclick="searchCourses()">Search</button>
-      </div>
+        <button type="submit">Search</button>
+      </form>
       <ul id="suggestions-list"></ul>
     </section>
 
-    <!-- Progress (NEW functional tracker) -->
+    <!-- Progress -->
     <section id="progress" class="card">
       <h2>📈 Progress Tracker</h2>
 
-      <div class="progress-item">
+      <form class="progress-item" data-emp="aishwarya" id="aishwarya-form">
         <span>Aishwarya</span>
         <progress id="aishwarya-progress" value="60" max="100"></progress>
         <div class="progress-controls">
           <input type="number" id="aishwarya-input" min="0" max="100" placeholder="Update %" />
-          <button onclick="updateProgress('aishwarya')">Update</button>
+          <button type="submit">Update</button>
         </div>
-      </div>
+      </form>
 
-      <div class="progress-item">
+      <form class="progress-item" data-emp="raj" id="raj-form">
         <span>Raj</span>
         <progress id="raj-progress" value="30" max="100"></progress>
         <div class="progress-controls">
           <input type="number" id="raj-input" min="0" max="100" placeholder="Update %" />
-          <button onclick="updateProgress('raj')">Update</button>
+          <button type="submit">Update</button>
         </div>
-      </div>
+      </form>
     </section>
   </main>
 
