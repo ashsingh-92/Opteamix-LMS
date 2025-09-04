@@ -1,128 +1,106 @@
-// -------- FIRESTORE: Load user data --------
-async function loadUserData() {
-  const currentUser = localStorage.getItem("currentUser");
-  if (!currentUser) return;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Opteamix LMS – Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo-wrap">
+      <img src="opteamix-logo.png" alt="Opteamix Logo" class="nav-logo"/>
+      <span class="brand">Opteamix LMS</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#welcome" class="active">🏠 Home</a></li>
+      <li><a href="#trainings">📚 Trainings</a></li>
+      <li><a href="#suggestions">🔍 Course Suggestions</a></li>
+      <li><a href="#progress">📈 Progress</a></li>
+      <li><a href="index.html" class="logout">Logout</a></li>
+    </ul>
+  </nav>
 
-  try {
-    const userRef = db.collection("users").doc(currentUser.toLowerCase());
-    const docSnap = await userRef.get();
+  <!-- Header banner -->
+  <header class="header">
+    <h1>Learning Management System</h1>
+  </header>
 
-    if (docSnap.exists) {
-      const data = docSnap.data();
-      document.getElementById("welcome-title").textContent = `👋 Welcome ${data.name}`;
-      document.getElementById("welcome-message").textContent = data.message;
-    } else {
-      document.getElementById("welcome-title").textContent = "👋 Welcome!";
-      document.getElementById("welcome-message").textContent = "No personalized data found.";
-    }
-  } catch (error) {
-    console.error("Error loading user data:", error);
-  }
-}
+  <!-- Main grid -->
+  <main class="container">
+    <!-- 🔹 Welcome card (from Firestore) -->
+    <section id="welcome" class="card">
+      <h2 id="welcome-title">👋 Welcome!</h2>
+      <p id="welcome-message">Loading your data...</p>
+    </section>
 
-// -------- TRAININGS --------
-function addTraining() {
-  const input = document.getElementById("new-training");
-  const trainingName = input.value.trim();
-  if (trainingName) {
-    const list = document.getElementById("training-list");
-    const li = document.createElement("li");
-    li.innerHTML = `<strong>${trainingName}</strong> – Enrolled: None yet`;
-    list.appendChild(li);
-    input.value = "";
-  } else {
-    alert("Please enter a training name!");
-  }
-}
+    <!-- Trainings -->
+    <section id="trainings" class="card">
+      <h2>📚 Available Trainings</h2>
+      <ul id="training-list">
+        <li><strong>Leadership Skills</strong> – Enrolled: John, Priya</li>
+        <li><strong>Time Management</strong> – Enrolled: Aishwarya, Raj</li>
+      </ul>
+      <form id="training-form" class="form-row">
+        <input id="new-training" type="text" placeholder="Enter course name" />
+        <button type="submit">➕ Add Training</button>
+      </form>
+    </section>
 
-// -------- COURSE SUGGESTIONS --------
-function searchCourses() {
-  const query = document.getElementById("search-input").value.trim().toLowerCase();
-  const suggestionsList = document.getElementById("suggestions-list");
-  suggestionsList.innerHTML = "";
+    <!-- Suggestions -->
+    <section id="suggestions" class="card">
+      <h2>🔍 Course Suggestions</h2>
+      <form id="search-form" class="form-row">
+        <input id="search-input" type="text" placeholder="Search for courses (e.g., AI, Leadership)"/>
+        <button type="submit">Search</button>
+      </form>
+      <ul id="suggestions-list"></ul>
+    </section>
 
-  if (!query) {
-    alert("Please enter a keyword to search!");
-    return;
-  }
+    <!-- Progress -->
+    <section id="progress" class="card">
+      <h2>📈 Progress Tracker</h2>
+      <form class="progress-item" data-emp="aishwarya" id="aishwarya-form">
+        <span>Aishwarya</span>
+        <progress id="aishwarya-progress" value="60" max="100"></progress>
+        <div class="progress-controls">
+          <input type="number" id="aishwarya-input" min="0" max="100" placeholder="Update %" />
+          <button type="submit">Update</button>
+        </div>
+      </form>
+      <form class="progress-item" data-emp="raj" id="raj-form">
+        <span>Raj</span>
+        <progress id="raj-progress" value="30" max="100"></progress>
+        <div class="progress-controls">
+          <input type="number" id="raj-input" min="0" max="100" placeholder="Update %" />
+          <button type="submit">Update</button>
+        </div>
+      </form>
+    </section>
+  </main>
 
-  const courses = [
-    { name: "AI for Everyone – Coursera", url: "https://www.coursera.org/learn/ai-for-everyone" },
-    { name: "Machine Learning – Coursera", url: "https://www.coursera.org/learn/machine-learning" },
-    { name: "Leadership Principles – HBS Online", url: "https://online.hbs.edu/courses/leadership-principles/" },
-    { name: "Emotional Intelligence – Coursera", url: "https://www.coursera.org/learn/emotional-intelligence" },
-    { name: "Python for Everybody – Coursera", url: "https://www.coursera.org/specializations/python" },
-    { name: "Data Science MicroMasters – edX", url: "https://www.edx.org/micromasters/mitx-statistics-and-data-science" },
-    { name: "Project Management – Coursera", url: "https://www.coursera.org/professional-certificates/google-project-management" }
-  ];
+  <!-- ✅ Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
 
-  const results = courses.filter(c => c.name.toLowerCase().includes(query));
+  <script>
+    // ✅ Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyC9Na9VtSJeyrbKEYBRie4wMv-DNg7XCVs",
+      authDomain: "opteamix-lms-4f048.firebaseapp.com",
+      projectId: "opteamix-lms-4f048",
+      storageBucket: "opteamix-lms-4f048.firebasestorage.app",
+      messagingSenderId: "830897127147",
+      appId: "1:830897127147:web:6276702cedbba9433e88ae"
+    };
 
-  if (results.length > 0) {
-    results.forEach(course => {
-      const li = document.createElement("li");
-      li.innerHTML = `<a href="${course.url}" target="_blank" rel="noopener">${course.name}</a>`;
-      suggestionsList.appendChild(li);
-    });
-  } else {
-    suggestionsList.innerHTML = "<li>No courses found. Try another keyword.</li>";
-  }
-}
+    // ✅ Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
 
-// -------- PROGRESS TRACKER --------
-function updateProgress(employee) {
-  const progressBar = document.getElementById(`${employee}-progress`);
-  const input = document.getElementById(`${employee}-input`);
-  const newValue = parseInt(input.value, 10);
-
-  if (!isNaN(newValue) && newValue >= 0 && newValue <= 100) {
-    progressBar.value = newValue;
-    localStorage.setItem(`${employee}-progress`, String(newValue));
-    input.value = "";
-  } else {
-    alert("Please enter a number between 0 and 100.");
-  }
-}
-
-// -------- FORM HANDLERS --------
-document.addEventListener("DOMContentLoaded", () => {
-  // Load Firestore welcome message
-  loadUserData();
-
-  // Restore saved progress
-  ["aishwarya", "raj"].forEach(emp => {
-    const saved = localStorage.getItem(`${emp}-progress`);
-    if (saved !== null) {
-      const bar = document.getElementById(`${emp}-progress`);
-      if (bar) bar.value = parseInt(saved, 10);
-    }
-  });
-
-  // Trainings form
-  const trainingForm = document.getElementById("training-form");
-  if (trainingForm) {
-    trainingForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      addTraining();
-    });
-  }
-
-  // Search form
-  const searchForm = document.getElementById("search-form");
-  if (searchForm) {
-    searchForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      searchCourses();
-    });
-  }
-
-  // Progress forms
-  const progressForms = document.querySelectorAll(".progress-item");
-  progressForms.forEach(form => {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const emp = form.getAttribute("data-emp");
-      if (emp) updateProgress(emp);
-    });
-  });
-});
+  <!-- Your app logic -->
+  <script src="app.js"></script>
+</body>
+</html>
