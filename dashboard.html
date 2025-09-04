@@ -14,7 +14,8 @@
       <span class="brand">Opteamix LMS</span>
     </div>
     <ul class="nav-links">
-      <li><a href="#trainings" class="active">📚 Trainings</a></li>
+      <li><a href="#welcome" class="active">🏠 Home</a></li>
+      <li><a href="#trainings">📚 Trainings</a></li>
       <li><a href="#suggestions">🔍 Course Suggestions</a></li>
       <li><a href="#progress">📈 Progress</a></li>
       <li><a href="index.html" class="logout">Logout</a></li>
@@ -28,6 +29,12 @@
 
   <!-- Main grid -->
   <main class="container">
+    <!-- 🔹 Welcome card (from Firestore) -->
+    <section id="welcome" class="card">
+      <h2 id="welcome-title">👋 Welcome!</h2>
+      <p id="welcome-message">Loading your data...</p>
+    </section>
+
     <!-- Trainings -->
     <section id="trainings" class="card">
       <h2>📚 Available Trainings</h2>
@@ -35,8 +42,6 @@
         <li><strong>Leadership Skills</strong> – Enrolled: John, Priya</li>
         <li><strong>Time Management</strong> – Enrolled: Aishwarya, Raj</li>
       </ul>
-
-      <!-- Form so Enter works -->
       <form id="training-form" class="form-row">
         <input id="new-training" type="text" placeholder="Enter course name" />
         <button type="submit">➕ Add Training</button>
@@ -56,7 +61,6 @@
     <!-- Progress -->
     <section id="progress" class="card">
       <h2>📈 Progress Tracker</h2>
-
       <form class="progress-item" data-emp="aishwarya" id="aishwarya-form">
         <span>Aishwarya</span>
         <progress id="aishwarya-progress" value="60" max="100"></progress>
@@ -65,7 +69,6 @@
           <button type="submit">Update</button>
         </div>
       </form>
-
       <form class="progress-item" data-emp="raj" id="raj-form">
         <span>Raj</span>
         <progress id="raj-progress" value="30" max="100"></progress>
@@ -77,6 +80,9 @@
     </section>
   </main>
 
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
