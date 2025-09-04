@@ -6,20 +6,21 @@
   padding: 30px;
 }
 
-/* Make Welcome card span across all columns */
-#welcome {
-  grid-column: 1 / -1;
-  text-align: center;       /* center align */
-  background: #e9f4ff;      /* subtle blue background */
+/* Force Welcome card full width */
+.welcome-card {
+  grid-column: 1 / -1;   /* spans across all columns */
+  text-align: center;
+  background: #e9f4ff;
+  padding: 25px;
 }
 
-#welcome h2 {
+.welcome-card h2 {
   font-size: 28px;
   color: #003366;
   margin-bottom: 10px;
 }
 
-#welcome p {
+.welcome-card p {
   font-size: 18px;
   color: #444;
 }
