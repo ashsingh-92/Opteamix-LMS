@@ -1,4 +1,4 @@
-/* General Reset */
+/* ---------- Reset ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
   font-family: Arial, sans-serif;
 }
 
-/* ========== LOGIN PAGE ========== */
+/* ---------- LOGIN PAGE ---------- */
 body.login-page {
   display: flex;
   justify-content: center;
@@ -21,11 +21,11 @@ body.login-page {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   text-align: center;
-  width: 300px;
+  width: 320px;
 }
 
 .login-logo {
-  width: 120px;
+  width: 140px;
   margin-bottom: 15px;
 }
 
@@ -38,8 +38,8 @@ body.login-page {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #ccd6e0;
+  border-radius: 6px;
 }
 
 .login-container button {
@@ -48,7 +48,7 @@ body.login-page {
   background: #004c97;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
 }
@@ -57,7 +57,7 @@ body.login-page {
   background: #003366;
 }
 
-/* ========== DASHBOARD ========== */
+/* ---------- DASHBOARD ---------- */
 body {
   background: #f5f9ff;
   color: #333;
@@ -99,7 +99,7 @@ body {
   color: white;
   text-decoration: none;
   border-radius: 6px;
-  transition: 0.3s;
+  transition: 0.25s;
 }
 
 .navbar .nav-links a:hover,
@@ -116,10 +116,10 @@ body {
   font-size: 24px;
 }
 
-/* Container */
+/* Main grid */
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 25px;
   padding: 30px;
 }
@@ -128,7 +128,7 @@ body {
 .card {
   background: white;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
@@ -137,40 +137,4 @@ body {
   color: #003366;
 }
 
-/* Form row */
-.form-row {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.form-row input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.form-row button {
-  padding: 10px 15px;
-  background: #0077cc;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.form-row button:hover {
-  background: #005f8a;
-}
-
-/* Suggestions list */
-#suggestions-list li {
-  margin: 8px 0;
-}
-
-#suggestions-list a {
-  color: #0077cc;
-  text-decoration: underline;
-}
+/* Form*
